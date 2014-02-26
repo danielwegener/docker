@@ -450,11 +450,15 @@ func (container *Container) Start() (err error) {
 	env := []string{
 		"HOME=/",
 		"PATH=" + defaultPathEnv,
-		"HOSTNAME=" + container.Config.Hostname,
+		"HOSTNAME=" + container.Config.Hostname
 	}
 
 	if container.Config.Tty {
 		env = append(env, "TERM=xterm")
+	}
+	
+	if !container.runtime.config.DisableNetwork {
+		env = append(env, "HOST_ADDR=" + container.NetworkSettings.IPAddress)
 	}
 
 	// Init any links between the parent and children
