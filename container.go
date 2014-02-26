@@ -450,7 +450,7 @@ func (container *Container) Start() (err error) {
 	env := []string{
 		"HOME=/",
 		"PATH=" + defaultPathEnv,
-		"HOSTNAME=" + container.Config.Hostname,
+		"HOSTNAME=" + container.Config.Hostname
 	}
 
 	if container.Config.Tty {
